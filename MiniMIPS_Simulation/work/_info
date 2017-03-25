@@ -1,0 +1,121 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/admin/Desktop/VLIWTest
+Ealu
+Z0 w1086248742
+Z1 DPx4 work 9 pack_mips 0 22 ioOc7LgYOLe@XeoEJHABJ3
+Z2 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z5 dC:/Users/admin/Desktop/MiniMIPS_Simulation
+Z6 8C:/Users/admin/Desktop/MiniMIPS_Simulation/alu.vhd
+Z7 FC:/Users/admin/Desktop/MiniMIPS_Simulation/alu.vhd
+l0
+L58
+VnnZe6a9Jb7[aiP`A;I@752
+!s100 GzX]ZLzK_FHl;R:6=b^CC1
+Z8 OP;C;10.4a;61
+32
+Z9 !s110 1490393252
+!i10b 1
+Z10 !s108 1490393252.000000
+Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/admin/Desktop/MiniMIPS_Simulation/alu.vhd|
+Z12 !s107 C:/Users/admin/Desktop/MiniMIPS_Simulation/alu.vhd|
+!i113 1
+Z13 o-work work -2002 -explicit -O0
+Z14 tExplicit 1
+Artl
+R1
+R2
+R3
+R4
+DEx4 work 3 alu 0 22 nnZe6a9Jb7[aiP`A;I@752
+l93
+L73
+VkT8A3>Q4kBX]i0<ZTzUKe1
+!s100 Io4_I0g`C3b@TM3IM0Pkc1
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Ppack_mips
+R3
+R4
+w1086265594
+R5
+8C:/Users/admin/Desktop/MiniMIPS_Simulation/pack_mips.vhd
+FC:/Users/admin/Desktop/MiniMIPS_Simulation/pack_mips.vhd
+l0
+L55
+VioOc7LgYOLe@XeoEJHABJ3
+!s100 aB77dMR8A>1l_cB9DmdlS0
+R8
+32
+!s110 1490393247
+!i10b 1
+!s108 1490393247.000000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/admin/Desktop/MiniMIPS_Simulation/pack_mips.vhd|
+!s107 C:/Users/admin/Desktop/MiniMIPS_Simulation/pack_mips.vhd|
+!i113 1
+R13
+R14
+Etestbecnch
+Z15 w1490406696
+R1
+Z16 DPx4 ieee 9 math_real 0 22 Sk6CSihbPL<f[^Shm]=KX0
+Z17 DPx4 ieee 16 std_logic_textio 0 22 V5TSK`;aJKC<l]CEg1>mz1
+R2
+R3
+R4
+R5
+Z18 8C:/Users/admin/Desktop/MiniMIPS_Simulation/testbench.vhd
+Z19 FC:/Users/admin/Desktop/MiniMIPS_Simulation/testbench.vhd
+l0
+L10
+VZL`6>43QXb^zoSfPPhY?O1
+!s100 FQKV9@zn49ZXA9Xl17KO]0
+R8
+32
+Z20 !s110 1490406702
+!i10b 1
+Z21 !s108 1490406702.000000
+Z22 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/admin/Desktop/MiniMIPS_Simulation/testbench.vhd|
+Z23 !s107 C:/Users/admin/Desktop/MiniMIPS_Simulation/testbench.vhd|
+!i113 1
+R13
+R14
+Abehaviour
+R1
+R16
+R17
+R2
+R3
+R4
+Z24 DEx4 work 10 testbecnch 0 22 ZL`6>43QXb^zoSfPPhY?O1
+l38
+L13
+Vo]6Rcb>GEeQ5kCdebNE2U1
+!s100 AE<i988hB68Rn1`UGnzoE3
+R8
+32
+R20
+!i10b 1
+R21
+R22
+R23
+!i113 1
+R13
+R14
