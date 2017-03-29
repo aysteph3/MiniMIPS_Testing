@@ -3,18 +3,17 @@ import sys
 def delete_line(num):
   #num = 1
 
-  with open('generated_file\out.txt', 'r') as fr:          
+  with open('generated_file/out.txt', 'r') as fr:          
       lines = fr.readlines()
       if num in range(len(lines)):
         del lines[num-1]
 
-  with open('generated_file\out.txt', 'w') as fw:
+  with open('generated_file/out.txt', 'w') as fw:
       fw.writelines(lines)
 
 
 # merge content of file, appending last column in each segment to the first
 def mergefile(filen):
-  #delete_line(1)
   try:
      f = open(filen,'r')
   except Exception as e:
@@ -45,10 +44,11 @@ def mergefile(filen):
           firstPass = False
 
   f.close()
-  out = open('generated_file\output.txt', 'w')
+  out = open('generated_file/output.txt', 'w')
   for line in lines:
-      out.write(line + "\n")
+      #print line[0:35]
+      out.write(line[29:] + "\n")
   out.close()
 
-#filename = "out.txt"
+#filename = "generated_file/out.txt"
 #mergefile(filename)
