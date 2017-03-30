@@ -44,7 +44,7 @@ def mergefile(filen):
           firstPass = False
 
   f.close()
-  out = open('generated_file/output.txt', 'w')
+  out = open('sim_generated_file/output.txt', 'w')
   for line in lines:
       #print line[0:35]
       out.write(line[29:] + "\n")

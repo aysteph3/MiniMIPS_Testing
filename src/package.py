@@ -143,7 +143,7 @@ def make_table_header(table_file, len_of_list):
 	"""
 	string =  '%10s' %(" ")
 	for function in range(1, len_of_list-1):
-		string += "\t"+'%8s' %("f_"+str(function)) # -1 to march the number of functions for readability
+		string += "\t"+'%8s' %("f_"+str(function))
 	table_file.write(string+"\n")
 	string = '%10s' %(" ")+ "\t" + "------------"*(len_of_list-2)
 	table_file.write(string+"\n")

@@ -61,7 +61,7 @@ clk_process:
 monitor:
       process
        variable count_value   : integer := 0;
-       file     out_file      : text open write_mode is "generated_file/out.txt";
+       file     out_file      : text open write_mode is "sim_generated_file/out.txt";
        file   input_file      : text;  --declare input file
        variable line_v        : line;
        variable line_num      : line;
