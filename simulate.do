@@ -12,6 +12,6 @@ vsim work.testbench
 # Draw waves 
 
 # Run simulation
-run 2000000 ns
+run 3000000 ns
 
 quit
