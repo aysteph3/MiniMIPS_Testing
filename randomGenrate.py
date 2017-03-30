@@ -1,4 +1,5 @@
 import random
+import os
 
 """fixes the number of random number generated each time executed. 
 If removed random number changes each time"""
@@ -11,6 +12,13 @@ def randbin2(d):
         b = bin(random.randint(0, mx)) 
         return b[2:].rjust(d, '0') 
         
+if os.path.exists("sim_input"):
+	files = [file for file in os.listdir("sim_input")]
+	for file in files:
+		os.remove("sim_input"+"/"+file)
+else:
+	os.mkdir("sim_input")
+
       
 filename = "sim_input/input.txt"  # input data in format needed by simulation
 filename2 = "sim_input/hex_input.txt"
