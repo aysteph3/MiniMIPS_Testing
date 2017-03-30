@@ -12,9 +12,9 @@ def randbin2(d):
         return b[2:].rjust(d, '0') 
         
       
-filename = "sim_input\input.txt"  # input data in format needed by simulation
-filename2 = "sim_input\hex_input.txt"
-filename3 = "sim_input\inputclone.txt" # clone of input with patterns separated for clarity
+filename = "sim_input/input.txt"  # input data in format needed by simulation
+filename2 = "sim_input/hex_input.txt"
+filename3 = "sim_input/inputclone.txt" # clone of input with patterns separated for clarity
 
 target = open(filename, 'w')
 target2 = open(filename2, 'w')
