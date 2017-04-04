@@ -144,10 +144,17 @@ for func_id_1 in range(2, len_of_list):
 			for scan_pattern in best_solution:
 				scanning_test_f1_f2 = format(int(scanning_test_f1_f2, 2) | int(function_dict[scan_pattern][func_id_1], 2), 'b').zfill(data_width)
  
-			if redundant_function_reduction and (str(func_id_1-1)+"_"+str(func_id_2-1) in package.related_functions.keys()):
-				number_of_zeros_in_experiments  += sufficient.count("0") - package.related_functions[str(func_id_1-1)+"_"+str(func_id_2-1)].count("0")
-			elif sufficient != "0"*data_width:
-				number_of_zeros_in_experiments  += sufficient.count("0")
+			if redundant_function_reduction:
+				if  (str(func_id_1-1)+"_"+str(func_id_2-1) in package.related_functions.keys()): 
+					number_of_zeros_in_experiments  += or_op.count("0") - package.related_functions[str(func_id_1-1)+"_"+str(func_id_2-1)].count("0")
+				elif (str(func_id_1-1)+"_*" in package.related_functions.keys()):
+					number_of_zeros_in_experiments  += or_op.count("0") - package.related_functions[str(func_id_1-1)+"_*"].count("0")
+				elif ("*_"+str(func_id_2-1) in package.related_functions.keys()):
+					number_of_zeros_in_experiments  += or_op.count("0") - package.related_functions["*_"+str(func_id_2-1)].count("0")
+				else:
+					number_of_zeros_in_experiments  += or_op.count("0")
+			else:
+				number_of_zeros_in_experiments  += or_op.count("0")
 			number_of_ones_in_experiments  += sufficient.count("1")
 			
 			used_dic['{0:03}'.format(func_id_1)+"_"+'{0:03}'.format(func_id_2)] = copy.deepcopy(current_set_of_patterns)

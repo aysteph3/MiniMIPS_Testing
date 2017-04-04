@@ -6,27 +6,7 @@ import sys, os
 # use the function number in the table file!
 # "10000000" means that only the most significant bit is provable to be testable
 # "01111111" the most significant bit is not testable
-related_functions = { "10_11" : "10000000",  	# SHR, ASR
-					  "11_10" : "10000000",		# ASR, SHR
-					  "12_13" : "11111110",		# INC, DEC
-					  "13_12" : "11111110",		# DEC, INC
-					  "4_11"  : "01111111",		# CMP, ASR
-					  "11_4"  : "01111111",		# ASR, CMP
-					  "2_7"   : "11111110",		# ADD, XOR
-					  "7_2"   : "11111110",		# XOR, ADD
-					  "3_7"   : "11111110",		# SUB, XOR
-					  "7_3"   : "11111110",		# XOR, SUB
-					  "3_2"   : "11111110",		# SUB, ADD
-					  "2_3"   : "11111110",		# ADD, SUB
-					  "6_2"   : "11111110",		# OR, ADD
-					  "6_3"   : "11111110",		# OR, SUB
-					  "6_11"  : "01111111",		# OR, ASR
-					  "11_14"  : "01111111",	# ASR, RLC
-					  "11_15"  : "01111111",	# ASR, RRC
-					  "14_11"  : "01111111",	# ASR, RLC
-					  "15_11"  : "01111111",	# ASR, RRC
-					  "11_5"  : "01111111",		# ASR, ANd
-}
+related_functions = { "*_11" : "00000000000000000000000000000001"}
 
 pre_determinde_patterns = {
 							"F1" : [1, 2, 6, 4, 7],
@@ -46,6 +26,7 @@ pre_determinde_patterns = {
 							"F15" : [1, 2, 3, 4, 5, 6, 10, 15, 9, 11, 14, 16, 20], 
 							"F16" : [1, 2, 3, 4, 7, 6], 
 } 
+
 
 generated_files_folder = "../generated_files"
 data_width  = 8
@@ -143,9 +124,9 @@ def make_table_header(table_file, len_of_list):
 	"""
 	string =  '%10s' %(" ")
 	for function in range(1, len_of_list-1):
-		string += "\t"+'%8s' %("f_"+str(function))
+		string += "\t"+'%32s' %("f_"+str(function))
 	table_file.write(string+"\n")
-	string = '%10s' %(" ")+ "\t" + "------------"*(len_of_list-2)
+	string = '%10s' %(" ")+ "\t" + "------------"*4*(len_of_list-2)
 	table_file.write(string+"\n")
 	return None
 
