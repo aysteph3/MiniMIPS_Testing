@@ -138,7 +138,7 @@ for func_id_1 in range(2, len_of_list):
 					final_set_of_patterns.append(final_pattern)
 
 			string += "\t"+str(sufficient)
- 
+  
 			for scan_pattern in best_solution:
 				scanning_test_f1_f2 = format(int(scanning_test_f1_f2, 2) | int(function_dict[scan_pattern][func_id_1], 2), 'b').zfill(data_width)
 
