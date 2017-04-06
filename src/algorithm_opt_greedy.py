@@ -64,7 +64,7 @@ for func_id_1 in range(2, len_of_list):
 	string =  '%10s' %("f_"+str(func_id_1-1)+"|") 			# -1 to march the number of functions for readability
 	scanning_string =  '%10s' %("f_"+str(func_id_1-1)+"|") 	# -1 to march the number of functions for readability
 	scanning_test_f1 = "0"*data_width
-	for func_id_2 in range(2, len_of_list):		
+	for func_id_2 in range(2, len_of_list):
 		if func_id_1 != func_id_2:
 			scanning_test_f1_f2 = "0"*data_width
 			list_of_used_patterns =  range(1, number_of_lines+1)
@@ -72,7 +72,7 @@ for func_id_1 in range(2, len_of_list):
 				print "------------------------------------------"*3
 				print "function 1: ", func_id_1-1, "function 2:", func_id_2-1
 				print "------------------------------------------"*3
-			
+
 			counter = 0
 			list_of_excluded_patterns = copy.deepcopy(final_set_of_patterns)
 			break_the_loop = False
@@ -82,24 +82,24 @@ for func_id_1 in range(2, len_of_list):
 			sufficient =  check_if_sufficient(function_dict, func_id_1, func_id_2, list_of_excluded_patterns, debug, verbose)
 
 			while(counter < number_of_lines):
-				list_of_ones_in_ands = package.find_most_signifacant_conformity(function_dict, func_id_1, func_id_2, list_of_used_patterns, 
+				list_of_ones_in_ands = package.find_most_signifacant_conformity(function_dict, func_id_1, func_id_2, list_of_used_patterns,
 																				list_of_excluded_patterns, sufficient, debug, verbose)
 			 	if len(list_of_ones_in_ands.keys())>0:
 			 		if verbose:
 					 	print "\tmax number of ones:", max(list_of_ones_in_ands.keys())
-				 	
-				 	if max(list_of_ones_in_ands.keys()) == 0: 
+
+				 	if max(list_of_ones_in_ands.keys()) == 0:
 				 		break
 				 	list_of_best_patterns = list_of_ones_in_ands[max(list_of_ones_in_ands.keys())]
 				 	if verbose:
 					 	print "\tbest patterns in this round:", list_of_best_patterns
 					for item in list_of_best_patterns:
-						if type(item) == int: 
+						if type(item) == int:
 							item = [item]
 						if verbose:
 							print "\t----------------------"
 							print "\ttrying combination: ", list_of_excluded_patterns+list(item)
-						
+
 						sufficient =  check_if_sufficient(function_dict, func_id_1, func_id_2, list_of_excluded_patterns+list(item), debug, verbose)
 						if sufficient.count("1") == len(sufficient):
 						 	best_solution = copy.deepcopy(list_of_excluded_patterns+list(item))
@@ -116,12 +116,12 @@ for func_id_1 in range(2, len_of_list):
 						 		list_of_excluded_patterns += list(item)
 						 		best_solution = copy.deepcopy(list_of_excluded_patterns)
 						 		best_value = sufficient.count("1")
-						 		
+
 						 		break
 						if break_the_loop:
 							break
 					if break_the_loop:
-							break 		
+							break
 					counter += 1
 				else:
 					break
@@ -136,25 +136,25 @@ for func_id_1 in range(2, len_of_list):
 			for final_pattern in best_solution:
 				if final_pattern not in final_set_of_patterns:
 					final_set_of_patterns.append(final_pattern)
-				
-			string += "\t"+str(sufficient)
 
+			string += "\t"+str(sufficient)
+ 
 			for scan_pattern in best_solution:
 				scanning_test_f1_f2 = format(int(scanning_test_f1_f2, 2) | int(function_dict[scan_pattern][func_id_1], 2), 'b').zfill(data_width)
- 
+
 			if redundant_function_reduction:
-				if  (str(func_id_1-1)+"_"+str(func_id_2-1) in package.related_functions.keys()): 
-					number_of_zeros_in_experiments  += or_op.count("0") - package.related_functions[str(func_id_1-1)+"_"+str(func_id_2-1)].count("0")
+				if  (str(func_id_1-1)+"_"+str(func_id_2-1) in package.related_functions.keys()):
+					number_of_zeros_in_experiments  += sufficient.count("0") - package.related_functions[str(func_id_1-1)+"_"+str(func_id_2-1)].count("0")
 				elif (str(func_id_1-1)+"_*" in package.related_functions.keys()):
-					number_of_zeros_in_experiments  += or_op.count("0") - package.related_functions[str(func_id_1-1)+"_*"].count("0")
+					number_of_zeros_in_experiments  += sufficient.count("0") - package.related_functions[str(func_id_1-1)+"_*"].count("0")
 				elif ("*_"+str(func_id_2-1) in package.related_functions.keys()):
-					number_of_zeros_in_experiments  += or_op.count("0") - package.related_functions["*_"+str(func_id_2-1)].count("0")
+					number_of_zeros_in_experiments  += sufficient.count("0") - package.related_functions["*_"+str(func_id_2-1)].count("0")
 				else:
-					number_of_zeros_in_experiments  += or_op.count("0")
+					number_of_zeros_in_experiments  += sufficient.count("0")
 			else:
-				number_of_zeros_in_experiments  += or_op.count("0")
+				number_of_zeros_in_experiments  += sufficient.count("0")
 			number_of_ones_in_experiments  += sufficient.count("1")
-			
+
 			used_dic['{0:03}'.format(func_id_1)+"_"+'{0:03}'.format(func_id_2)] = copy.deepcopy(final_set_of_patterns)
 		else:
 			scanning_test_f1_f2 = "0"*data_width
@@ -168,7 +168,7 @@ for func_id_1 in range(2, len_of_list):
 	#-------------------------------------------------------------------------------
 	scanning_test_f1, best_solution = package.run_scanning_optimization(scanning_test_f1, function_dict, func_id_1, debug, verbose, best_solution)
 	scanning_string += "\t"+str(scanning_test_f1)
-	scanning_table_file.write(scanning_string+"\n")					
+	scanning_table_file.write(scanning_string+"\n")
 	table_file.write(string+"\n")
 
 
@@ -177,11 +177,11 @@ print "reporting test length for functions:"
 for func_id_1 in range(2, len_of_list):
 	patterns_for_current_function = []
 	#print "starting with list: ", final_set_of_patterns, "length:", len(final_set_of_patterns)
-	for func2 in range(2, len_of_list):	
+	for func2 in range(2, len_of_list):
 		or_op = "0"*data_width
 		if func2 != func_id_1:
 			for j in final_set_of_patterns:
-				#if j not in patterns_for_current_function:	
+				#if j not in patterns_for_current_function:
 				xor_op = format(int(function_dict[j][func_id_1], 2) ^ int(function_dict[j][func2], 2), 'b').zfill(data_width)
 				and_op = format(int(function_dict[j][func2], 2) & int(xor_op, 2), 'b').zfill(data_width)
 				prev_or = or_op
@@ -189,19 +189,19 @@ for func_id_1 in range(2, len_of_list):
 				if prev_or == or_op or or_op == "0"*data_width:
 					pass
 				else:
-					if or_op != "0"*data_width:		
+					if or_op != "0"*data_width:
 						if j not in patterns_for_current_function:
 							patterns_for_current_function.append(j)
 					if or_op == "1"*data_width:
-						#print "found solution for pair:", func_id_1-1, func2-1	
+						#print "found solution for pair:", func_id_1-1, func2-1
 						break
 			if or_op != "0"*data_width:
 				if verbose:
-					print  "INFO::  Didn't find a solution!", func_id_1-1, func2-1	
-	#if verbose:				
+					print  "INFO::  Didn't find a solution!", func_id_1-1, func2-1
+	#if verbose:
 	#print  "neccessary patterns for function", func_id_1-1, "\t\t", patterns_for_current_function, "\t\t\ttest length:", len(patterns_for_current_function)
 	print  "function id: ", func_id_1-1, "\ttest length:", len(patterns_for_current_function)
-	
+
 	overal_test_length += len(patterns_for_current_function)
 
 
