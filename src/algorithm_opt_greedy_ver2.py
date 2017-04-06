@@ -53,20 +53,28 @@ except IOError:
     print "Could not open input pattern file, test pattern file, conformity or scanning table file!"
     sys.exit()
 
-package.make_table_header(table_file, len_of_list)
-package.make_table_header(scanning_table_file, len_of_list)
+
+if package.test_subset:
+	function_list = []
+	for item in package.test_only_list:
+		function_list.append(item+1)
+else:
+	function_list = range(2, len_of_list)
+
+package.make_table_header(table_file, function_list)
+package.make_table_header(scanning_table_file, function_list)
 
 number_of_ones_in_experiments = 0
 number_of_zeros_in_experiments = 0
 used_dic = {}
 final_set_of_patterns = []
 overal_test_length = 0
-for func_id_1 in range(2, len_of_list):
+for func_id_1 in function_list:
 	current_set_of_patterns = []
 	string =  '%10s' %("f_"+str(func_id_1-1)+"|") 			# -1 to march the number of functions for readability
 	scanning_string =  '%10s' %("f_"+str(func_id_1-1)+"|") 	# -1 to march the number of functions for readability
 	scanning_test_f1 = "0"*data_width
-	for func_id_2 in range(2, len_of_list):
+	for func_id_2 in function_list:
 		if func_id_1 != func_id_2:
 			scanning_test_f1_f2 = "0"*data_width
 			list_of_used_patterns =  range(1, number_of_lines+1)

@@ -290,8 +290,8 @@ related_functions = {
 						"20_21"  	: "11111111111111111111111111111110",
 						"27_21"  	: "11111111111111111111111111111110",
 						"*_22"  	: "11111111111111110000000000000000",
-						#"*_23"  	: "00000000000000000000000000000000",
-						#"*_24"  	: "00000000000000000000000000000000",
+						"*_23"  	: "00000000000000000000000000000000",
+						"*_24"  	: "00000000000000000000000000000000",
 						"6_25"  	: "00000000000000000000000000000000",
 						"12_25"  	: "11111111111111111111111111111110",
 						"26_25"  	: "00000000000000000000000000000000",
@@ -349,6 +349,8 @@ pre_determinde_patterns = {
 							"F16" : [1, 2, 3, 4, 7, 6],
 }
 
+test_subset = True
+test_only_list = [1,2,3,4,5,6,7,8,9,17,18,23,24,25,26]
 
 generated_files_folder = "../generated_files"
 data_width  = 32
@@ -437,18 +439,18 @@ def generate_folders(generated_files_folder):
 	return None
 
 
-def make_table_header(table_file, len_of_list):
+def make_table_header(table_file, function_list):
 	"""
 	writes the header for the table files
 	table_file: table file, should be open!
-	len_of_list: represents the number of functions in the experiment
+	function_list: represents the number of functions in the experiment
 	returns: None
 	"""
 	string =  '%10s' %(" ")
-	for function in range(1, len_of_list-1):
-		string += "\t"+'%32s' %("f_"+str(function))
+	for function in function_list:
+		string += "\t"+'%32s' %("f_"+str(function-1))
 	table_file.write(string+"\n")
-	string = '%10s' %(" ")+ "\t" + "------------"*4*(len_of_list-2)
+	string = '%10s' %(" ")+ "\t" + "------------"*4*len(function_list)
 	table_file.write(string+"\n")
 	return None
 

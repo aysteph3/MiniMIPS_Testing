@@ -37,25 +37,33 @@ except IOError:
     print "Could not open input pattern file, test pattern file, conformity or scanning table file!"
     sys.exit()
 
-package.make_table_header(table_file, len_of_list)
-package.make_table_header(scanning_table_file, len_of_list)
-
 deletion_dic = {}
 used_dic = {}
 number_of_ones_in_experiments = 0
 number_of_zeros_in_experiments = 0
 final_set_of_patterns = []
-for func_id_1 in range(2, len_of_list):
+
+if package.test_subset:
+	function_list = []
+	for item in package.test_only_list:
+		function_list.append(item+1)
+else:
+	function_list = range(2, len_of_list)
+
+package.make_table_header(table_file, function_list)
+package.make_table_header(scanning_table_file, function_list)
+
+for func_id_1 in function_list:
 	string =  '%10s' %("f_"+str(func_id_1-1)+"|") 			# -1 to march the number of functions for readability
 	scanning_string =  '%10s' %("f_"+str(func_id_1-1)+"|") 	# -1 to march the number of functions for readability
  	if "F"+str(func_id_1-1) in  package.pre_determinde_patterns.keys():
 	 	list_of_used_patterns = package.pre_determinde_patterns["F"+str(func_id_1-1)]
 		list_of_necessary_patterns = []
 		scanning_test_f1 = "0"*data_width
-		for func_id_2 in range(2, len_of_list):	
+		for func_id_2 in function_list:
 			scanning_test_f1_f2 = "0"*data_width
 			if func_id_1 != func_id_2:
-				
+
 				list_of_pattens_to_delete = []
 				if verbose:
 					print "---------------------------------------------------------------------------------------"
@@ -68,7 +76,7 @@ for func_id_1 in range(2, len_of_list):
 				or_op = "0"*data_width
 				for i in list_of_necessary_patterns:
 					xor_op = format(int(function_dict[i][func_id_1], 2) ^ int(function_dict[i][func_id_2], 2), 'b').zfill(data_width)
-					and_op = format(int(function_dict[i][func_id_2], 2) & int(xor_op, 2), 'b').zfill(data_width)	
+					and_op = format(int(function_dict[i][func_id_2], 2) & int(xor_op, 2), 'b').zfill(data_width)
 					or_op = format(int(or_op, 2) | int(and_op, 2), 'b').zfill(data_width)
 					if verbose:
 						print str(i)+"\t", function_dict[i][0],"\t", function_dict[i][1],"\t", function_dict[i][func_id_1], "\t", function_dict[i][func_id_2], "\t", xor_op, "\t"+str(and_op), "\t"+str(or_op)
@@ -85,7 +93,7 @@ for func_id_1 in range(2, len_of_list):
 								# print "adding pattern:", i, "to unused list"
 						else:
 							if or_op != "0"*data_width:
-								if i not in list_of_necessary_patterns:				
+								if i not in list_of_necessary_patterns:
 									list_of_necessary_patterns.append(i)
 									if verbose:
 										print str(i)+"\t", function_dict[i][0],"\t", function_dict[i][1],"\t", function_dict[i][func_id_1], "\t", function_dict[i][func_id_2], "\t", xor_op, "\t"+str(and_op), "\t"+str(or_op) , "\t\tadding pattern ", i, "to final pattern list!"
@@ -98,10 +106,10 @@ for func_id_1 in range(2, len_of_list):
 						print  "INFO::  Didn't find a solution!"
 
 				string += "\t"+str(or_op)
-				
+
 				number_of_ones_in_experiments  += or_op.count("1")
 				if redundant_function_reduction:
-					if  (str(func_id_1-1)+"_"+str(func_id_2-1) in package.related_functions.keys()): 
+					if  (str(func_id_1-1)+"_"+str(func_id_2-1) in package.related_functions.keys()):
 						number_of_zeros_in_experiments  += or_op.count("0") - package.related_functions[str(func_id_1-1)+"_"+str(func_id_2-1)].count("0")
 					elif (str(func_id_1-1)+"_*" in package.related_functions.keys()):
 						number_of_zeros_in_experiments  += or_op.count("0") - package.related_functions[str(func_id_1-1)+"_*"].count("0")
@@ -116,7 +124,7 @@ for func_id_1 in range(2, len_of_list):
 
 				for scan_pattern in list_of_necessary_patterns:
 					scanning_test_f1_f2 = format(int(scanning_test_f1_f2, 2) | int(function_dict[scan_pattern][func_id_1], 2), 'b').zfill(data_width)
-				
+
 
 				if verbose:
 					print "final list of patterns:", list_of_necessary_patterns
@@ -139,9 +147,9 @@ for func_id_1 in range(2, len_of_list):
 		#-------------------------------------------------------------------------------
 		scanning_test_f1, list_of_necessary_patterns = package.run_scanning_optimization(scanning_test_f1, function_dict, func_id_1, debug, verbose, list_of_necessary_patterns)
 		scanning_string += "\t"+str(scanning_test_f1)
-		scanning_table_file.write(scanning_string+"\n")					
+		scanning_table_file.write(scanning_string+"\n")
 		table_file.write(string+"\n")
-		
+
 		# Print patterns and functions.. This will be used to prepare test patterns for SAF testing in turbo tester
 		# This should only be used for VLIW experiment. Modification will be needed for other processors
 		if verbose:
@@ -152,7 +160,7 @@ for func_id_1 in range(2, len_of_list):
 		for j in list_of_necessary_patterns:
 			saf_test_patterns_file.write(function_dict[j][0]+function_dict[j][1]+opcode+"\n")
 
-# final set of patterns	
+# final set of patterns
 for k in final_set_of_patterns:
 	test_patterns_file.write(function_dict[k][0]+function_dict[k][1]+"\n")
 
