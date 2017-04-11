@@ -10,7 +10,10 @@ import package
 package.generate_folders(package.generated_files_folder)
 sys.stdout = Logger.Logger(package.generated_files_folder)
 
-
+if "-sp" in sys.argv[1:]:
+	saf_output_patterns_file_name= package.generated_files_folder + "/" +"SAF"+ sys.argv[sys.argv.index('-sp') + 1]
+else:
+	saf_output_patterns_file_name= package.generated_files_folder + "/" + "SAFpatterns.txt"
 
 def check_if_sufficient(function_dict, function_id_1, function_id_2, list_patterns, debug, verbose):
 	or_op = "0"*package.data_width
@@ -49,6 +52,7 @@ try:
 	table_file = open(output_table_file_name, 'w')
 	scanning_table_file = open(scanning_table_file_name, 'w')
 	test_patterns_file = open(output_patterns_file_name, 'w')
+	saf_test_patterns_file = open(saf_output_patterns_file_name, 'w')
 except IOError:
     print "Could not open input pattern file, test pattern file, conformity or scanning table file!"
     sys.exit()
@@ -184,6 +188,11 @@ for func_id_1 in function_list:
 		if k not in final_set_of_patterns:
 			final_set_of_patterns.append(k)
 
+	opcode = "{0:04b}".format((func_id_1-2))
+	for j in current_set_of_patterns:
+		saf_test_patterns_file.write(function_dict[j][0]+function_dict[j][1]+opcode+"\n")
+	#overal_test_length +=   len(list_of_necessary_patterns)
+
 print "reporting test length for functions:"
 for func_id_1 in range(2, len_of_list):
 	max_lenght = 0
@@ -214,3 +223,4 @@ print "program took ", str(stop_time-start_time), "seconds"
 table_file.close()
 scanning_table_file.close()
 test_patterns_file.close()
+saf_test_patterns_file.close()

@@ -350,7 +350,9 @@ pre_determinde_patterns = {
 }
 
 test_subset = True
-test_only_list = [1,2,3,4,5,6,7,8,9,17,18,23,24,25,26]
+test_only_list = [1,2,3,4,5,6,7,8,9,10,17,18,19,20,21,23,24,25,26]
+#test_only_list = [13,16]
+#test_only_list = [11,12,14,15,22]
 
 generated_files_folder = "../generated_files"
 data_width  = 32
@@ -545,11 +547,11 @@ def print_fault_coverage(number_of_lines, number_of_ones_in_experiments, number_
 
 def report_usefull_patterns_per_round(used_dic, len_of_list):
 	print "-----------------------------------------------------"
-	print "function pair", "\t", "\t", '%100s' % "usefull patterns","\t",'%10s' % "test length"
-	print "-------------", "\t", "\t", '%100s' % "----------------","\t",'%10s' % "----------------"
+	print "function pair", "\t", "\t", '%120s' % "usefull patterns","\t",'%10s' % "test length"
+	print "-------------", "\t", "\t", '%120s' % "----------------","\t",'%10s' % "----------------"
 	counter = 1
 	for item in sorted(used_dic.keys()):
-		print '%10s' %str(int(item.split("_")[0])-1)+"_"+str(int(item.split("_")[1])-1), "\t",'%100s' %used_dic[item], "\t",'%10s' %len(used_dic[item])
+		print '%10s' %str(int(item.split("_")[0])-1)+"_"+str(int(item.split("_")[1])-1), "\t",'%120s' %used_dic[item], "\t",'%10s' %len(used_dic[item])
 		counter += 1
 		if counter == len_of_list-2:
 			print "------------------------------------------------------------"*2
