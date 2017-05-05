@@ -6,6 +6,7 @@ import sys, os
 # use the function number in the table file!
 # "10000000" means that only the most significant bit is provable to be testable
 # "01111111" the most significant bit is not testable
+#test 
 related_functions = {
 						"2_1"  		: "00000000000000000000000000000000",
 						"3_1"  		: "11111111111111111111111111111110",
