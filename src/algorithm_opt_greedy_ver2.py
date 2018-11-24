@@ -20,14 +20,14 @@ def check_if_sufficient(function_dict, function_id_1, function_id_2, list_patter
 	if debug:
 		print "\t--------------------"
 		print "\tchecking if sufficient number of ones reached!"
-		print "\t\tline\top1\t\top2\t\tfunc_1 \t\t func_2\t\txor(1,2)\tand(1,xor)\tor(prev_or,and)"
+		print "\t\tline\top1\t\top2\t\tfunc_"+str(function_id_1)+" \t\t func_"+str(function_id_2)+"\t\txor(1,2)\tand(1,xor)\tor(prev_or,and)"
 		print "\t\t"+"------------------------------------------"*3
 	for i in list_patterns:
 		xor_op = format(int(function_dict[i][function_id_1], 2) ^ int(function_dict[i][function_id_2], 2), 'b').zfill(package.data_width)
 		and_op = format(int(function_dict[i][function_id_2], 2) & int(xor_op, 2), 'b').zfill(package.data_width)
 		or_op = format(int(or_op, 2) | int(and_op, 2), 'b').zfill(package.data_width)
 		if debug:
-			print "\t\t"+str(i)+"\t", function_dict[i][0],"\t", function_dict[i][1],"\t", function_dict[i][function_id_1], "\t", function_dict[i][function_id_2], "\t", xor_op, "\t"+str(and_op), "\t"+str(or_op)
+			print "\t\t"+str(i)+"\t", function_dict[i][0],"\t", function_dict[i][1],"\t", function_dict[i][function_id_1], "\t", function_dict[i][function_id_2], "\t",str(xor_op).zfill(package.data_width), "\t"+str(and_op)+ "\t"+str(or_op)
 	if or_op == "1"*package.data_width:
 		if verbose:
 			print "\tbingo! all ones!"
