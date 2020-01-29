@@ -7,11 +7,11 @@ vcom "src/alu.vhd"
 vcom "src/testbench.vhd"
 
 # Start simulation
-vsim work.testbench 
+vsim work.testbench
 
-# Draw waves 
+# Draw waves
 
 # Run simulation
-run 3000000 ns
+run 30000000 ns
 
-quit
+quit -f

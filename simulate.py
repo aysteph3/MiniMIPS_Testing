@@ -16,7 +16,7 @@ def main():
 	
 	os.system("vsim -do " + "simulate.do")
 	filename = "sim_generated_file/out.txt"
-	mergefile(filename)
+	#mergefile(filename)
 
 if __name__== "__main__":
   main()
