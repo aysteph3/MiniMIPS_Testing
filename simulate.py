@@ -14,7 +14,7 @@ def main():
 
 	generate_pattern_t(test_l,bit_l)
 	
-	os.system("vsim -do " + "simulate.do")
+	os.system("vsim -batch -do " + "simulate.do")
 	filename = "sim_generated_file/out.txt"
 	#mergefile(filename)
 
