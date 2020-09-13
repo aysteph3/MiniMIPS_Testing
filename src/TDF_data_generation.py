@@ -1,4 +1,9 @@
-inputFile = "../sim_generated_file/test.txt"
+#!/usr/bin/env python
+# Copyright (C) 2020 Stephen Oyeniran
+
+import pattern
+
+inputFile = "../sim_generated_file/out.txt"
 try:
     functional_result = open(inputFile, 'r')
     tdf_data = open("TDFdata.txt", 'w')
@@ -17,7 +22,7 @@ for number in range(2,lenght_of_line):
     for line in lines:
         data = line.split()
         f_res = format((int(f_res,2) | int(data[number],2)), 'b').zfill(32)
-        #print f_res, data[0], data[1]
+        #print f_res
         tdf_data.write(data[0]+ data[1]+"\n")
         if f_res == '11111111111111111111111111111111':
             break
@@ -29,7 +34,9 @@ for number in range(2,lenght_of_line):
         if f_res == '00000000000000000000000000000001' or f_res == '11111111111111110000000000000000':
             break
 
-    tdf_data.write('\n')
-
+    #tdf_data.write('\n')
 functional_result.close()
 lenght_file.close()
+tdf_data.close()
+
+pattern.remove_duplicate()
