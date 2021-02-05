@@ -1,2 +1,2 @@
 # MiniMIPS_Testing
-High-Level Testing of MiniMIPS processor
+High-Level Test Data generation for MiniMIPS processor
